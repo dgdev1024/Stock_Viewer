@@ -3,12 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "echo \"Error: no test... minimal project\" && exit 1",
-    "lint": "echo \"Error: no lint... minimal project\" && exit 1",
-    "e2e": "echo \"Error: no e2e... minimal project\" && exit 1"
+    "dev": "ng build & NODE_ENV='development' node index.js",
+    "start": "node index.js",
+    "postinstall": "ng build --prod --aot=false"
   },
   "private": true,
   "dependencies": {
@@ -21,8 +18,24 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@types/chart.js": "^2.6.12",
+    "@types/socket.io-client": "^1.4.31",
+    "async": "^2.6.0",
+    "axios": "^0.17.0",
+    "body-parser": "^1.18.2",
+    "chart.js": "^2.7.1",
+    "compression": "^1.7.1",
     "core-js": "^2.4.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
+    "html-escape": "^2.0.0",
+    "http-status-codes": "^1.3.0",
+    "mongoose": "^4.13.1",
+    "node-env-file": "^0.1.8",
     "rxjs": "^5.4.2",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
