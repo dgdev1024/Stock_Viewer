@@ -1,0 +1,16 @@
+<div class="st-card st-add-stock">
+  <form (submit)="onStockSubmit($event)">
+    <label for="add-stock-input">Enter a Stock Symbol: </label>
+    <input  type="text"
+            id="add-stock-input"
+            name="stockQuery"
+            [(ngModel)]="stockQuery"
+            placeholder="Example: MSFT" />
+    <button class="st-button confirm" type="submit">
+      <i class="fa fa-eye"></i> Watch Stock
+    </button>
+  </form>
+  <p *ngIf="stockError !== ''" class="st-add-stock-error">
+    {{ stockError }}
+  </p>
+</div>

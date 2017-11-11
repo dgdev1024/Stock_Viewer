@@ -1,0 +1,37 @@
+<div class="st-card st-stock-view {{ getChangeClass(stock.change) }}">
+  <p class="st-stock-symbol">
+    <i class="fa fa-circle" [style.color]="stock.color"></i>
+    {{ stock.symbol }}
+  </p>
+  <div class="st-stock-recent-sessions">
+    <p class="close">{{ recentSession().close }}</p>
+    <p class="change {{ getChangeClass(stock.change) }}">{{ stock.change }}</p>
+  </div>
+  <div class="st-stock-control-panel">
+    <button class="st-button primary" (click)="onHistoryClicked($event)">
+      <i class="fa fa-history"></i> 
+      {{
+        viewHistory ?
+          'Hide History' :
+          'Show History'
+      }}
+    </button>
+    <button class="st-button danger" (click)="onUnwatchClicked($event)">
+      <i class="fa fa-trash"></i> Unwatch stock
+    </button>
+  </div>
+  <div *ngIf="viewHistory === true" class="st-stock-history-pane">
+    <table>
+      <tr>
+        <th class="left">Date</th>
+        <th class="center">Value</th>
+        <th class="right">Change</th>
+      </tr>
+      <tr *ngFor="let session of stock.sessions.slice().reverse(); let i = index">
+        <td class="left">{{ session.date }}</td>
+        <td class="center">{{ session.close }}</td>
+        <td class="right {{ getChangeClass(session.change) }}">{{ session.change }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

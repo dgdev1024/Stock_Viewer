@@ -9,6 +9,7 @@ const axios         = require('axios').default;
 const waterfall     = require('async').waterfall;
 const asyncForEach  = require('async').forEachSeries;
 const stockModel    = require('../models/stock');
+const checkSymbol   = require('check-ticker-symbol');
 
 // Private Functions
 const private = {
@@ -81,7 +82,8 @@ const private = {
                     high: Number(timeSeriesDaily[session]['2. high']).toFixed(2),
                     low: Number(timeSeriesDaily[session]['3. low']).toFixed(2),
                     close: Number(timeSeriesDaily[session]['4. close']).toFixed(2),
-                    open: Number(timeSeriesDaily[session]['1. open']).toFixed(2)
+                    open: Number(timeSeriesDaily[session]['1. open']).toFixed(2),
+                    change: 0
                 });
 
                 // Bring in only the last twenty-five sessions - slightly above the number of
@@ -89,19 +91,20 @@ const private = {
                 if (sessions.length === 25) { break; }
             }
 
-            // Compare the stock's closing/current value with the previous trading day's close,
-            // or its opening price this morning in the case of an IPO stock on its first day.
-            let change = 0;
-            if (sessions.length === 1) {
-                change = sessions[0].close - sessions[0].open;
-            } else {
-                change = sessions[0].close - sessions[1].close;
+            for (let i = 0; i < sessions.length; ++i) {
+                if (i === sessions.length - 1) {
+                    sessions[i].change = (sessions[i].close - sessions[i].open).toFixed(2);
+                } else {
+                    sessions[i].change = (sessions[i].close - sessions[i + 1].close).toFixed(2);
+                }
             }
+
+            const change = sessions[0].change;
             
             // Return the array of sessions - reversed so that the most recent session
             // is at the last element of the array - and that recent session's close
             // in the callback.
-            return done(null, sessions.reverse(), change.toFixed(2));
+            return done(null, sessions.reverse(), change);
         }).catch((err) => {
             return done(err);
         });
@@ -121,6 +124,14 @@ module.exports = {
     watchStock (symbol, socket, done) {
         // Make sure our call symbol is uppercase.
         symbol = escape(symbol.toUpperCase());
+
+        // Make sure it's valid, too.
+        if (checkSymbol.valid(symbol) === false) {
+            return done({
+                status: 400,
+                message: `The ticker symbol, ${symbol}, is not valid.`
+            });
+        }
 
         // Our waterfall...
         waterfall(
@@ -201,12 +212,15 @@ module.exports = {
                 return {
                     symbol: stock.symbol,
                     change: stock.change,
-                    sessions: stock.sessions.map((session) => {
+                    sessions: stock.sessions.map((session, index, array) => {
                         return {
                             date: session.date,
                             close: session.close,
                             high: session.high,
-                            low: session.low
+                            low: session.low,
+                            change: index === 0 ? 
+                                    (session.close - session.open).toFixed(2) : 
+                                    (session.close - array[index - 1].close).toFixed(2)
                         };
                     })
                 };
@@ -293,7 +307,7 @@ module.exports = {
                                     socket.emit('update stock', {
                                         symbol: stock.symbol,
                                         change,
-                                        updated: newTradingSession ? sessions : newRecentSession,
+                                        updated: sessions,
                                         newTradingSession
                                     });
 

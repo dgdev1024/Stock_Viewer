@@ -1,0 +1,8 @@
+<div class="st-stock-view">
+  <app-add-stock></app-add-stock>
+  <app-stock-card *ngFor="let stock of watchStocks" [stock]="stock"></app-stock-card>
+  <p class="footer">
+    Coded by Dennis Griffin.
+    Stock Data Powered by <a href="https://www.alphavantage.co/" target="_blank">Alpha Vantage</a>.
+  </p>
+</div>
