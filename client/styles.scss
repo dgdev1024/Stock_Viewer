@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import './scss/mixins.scss';
+
+// Media Queries
+$sm-screen: "only screen and (max-width: 640px)";
+
+// Colors:
+$stock-view-bg: #444444;
+$stock-card-bg: #CCCCCC;
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: $stock-card-bg;
+}
+
+.st-body {
+    font-family: "Ubuntu", sans-serif;
+
+    @import './scss/stock-view.scss';
+    @import './scss/stock-chart.scss';
+}

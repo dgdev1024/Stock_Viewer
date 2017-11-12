@@ -1,0 +1,57 @@
+.st-stock-view {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    height: 100%;
+    overflow: auto;
+    background-color: $stock-view-bg;
+    @include box-shadow(3px, 3px, 5px, rgba(0, 0, 0, 0.5));
+    z-index: 100;
+
+    @media #{$sm-screen} {
+        position: static;
+        width: 98%;
+        margin: 0px auto;
+        background-color: $stock-card-bg;
+        @include box-shadow(0px, 0px, 0px, black);
+    }
+
+    .st-card {
+        position: static;
+        width: 95%;
+        height: auto;
+        margin: 8px auto;
+        padding: 12px;
+        box-sizing: border-box;
+        background-color: $stock-card-bg;
+        border: 1px solid black;
+        @include border-radius(4px);
+
+        @import './add-stock.scss';
+        @import './stock-card.scss';
+    }
+
+    .footer {
+        padding-top: 8px;
+        text-align: center;
+        color: white;
+
+        @media #{$sm-screen} {
+            color: black;
+        }
+
+        a {
+            text-decoration: none;
+            color: #CCCCCC;
+            
+            @media #{$sm-screen} {
+                color: #333333;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

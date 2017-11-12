@@ -1,0 +1,43 @@
+&.st-add-stock {
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    input[type="text"] {
+        display: block;
+        width: 100%;
+        margin-bottom: 4px;
+        padding: 4px;
+        box-sizing: border-box;
+        font-family: "Ubuntu", sans-serif;
+        font-size: 16px;
+        border: 1px solid #000000;
+        @include border-radius(4px);
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 4px;
+        box-sizing: border-box;
+        font-family: "Ubuntu", sans-serif;
+        font-size: 16px;
+        border: 1px solid #002200;
+        background-color: #007700;
+        color: #DDFFDD;
+        @include border-radius(4px);
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .st-add-stock-error {
+        padding-top: 8px;
+        text-align: center;
+        color: #440000;
+    }
+}

@@ -1,0 +1,131 @@
+&.st-stock-card {
+    &.up {
+        background-color: lightgreen;
+    }
+
+    &.down {
+        background-color: lightpink;
+    }
+
+    &.unchanged {
+        background-color: lightgrey;
+    }
+
+    .st-stock-symbol {
+        font-size: 20px;
+    }
+
+    .st-stock-recent-sessions {
+        padding: 4px 0px;
+
+        .close {
+            float: left;
+            font-size: 28px;
+        }
+
+        .change {
+            float: right;
+            margin-top: 3px;
+            font-size: 24px;
+
+            &.up {
+                color: #004400;
+            }
+
+            &.down {
+                color: #440000;
+            }
+
+            &.unchanged {
+                color: #444444;
+            }
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+
+    .st-stock-control-panel {
+        box-sizing: border-box;
+
+        .st-button {
+            display: inline-block;
+            width: 46%;
+            margin: 1%;
+            padding: 4px;
+            box-sizing: border-box;
+            font-family: "Ubuntu", sans-serif;
+            font-size: 14px;
+            @include border-radius(4px);
+    
+            &:hover {
+                cursor: pointer;
+            }
+
+            &.primary {
+                border: 1px solid #000022;
+                background-color: #000077;
+                color: #DDDDFF;
+            }
+            
+            &.danger {
+                border: 1px solid #220000;
+                background-color: #770000;
+                color: #FFDDDD;
+            }
+        }
+    }
+
+    .st-stock-history-pane {
+        width: 95%;
+        margin: 0px auto;
+        padding-top: 8px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th {
+                padding: 4px 0px;
+                border-bottom: 1px solid black;
+            }
+
+            td {
+                padding: 4px 0px;
+            }
+
+            .left {
+                text-align: left;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            .right {
+                text-align: right;
+
+                &.up {
+                    color: #004400;
+                }
+    
+                &.down {
+                    color: #440000;
+                }
+    
+                &.unchanged {
+                    color: #444444;
+                }
+            }
+        }
+    }
+    
+    .st-stock-card-error {
+        padding-top: 8px;
+        text-align: center;
+        color: #440000;
+    }
+}

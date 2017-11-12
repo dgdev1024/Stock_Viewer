@@ -125,14 +125,6 @@ module.exports = {
         // Make sure our call symbol is uppercase.
         symbol = escape(symbol.toUpperCase());
 
-        // Make sure it's valid, too.
-        if (checkSymbol.valid(symbol) === false) {
-            return done({
-                status: 400,
-                message: `The ticker symbol, ${symbol}, is not valid.`
-            });
-        }
-
         // Our waterfall...
         waterfall(
             [

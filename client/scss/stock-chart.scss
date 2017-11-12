@@ -1,0 +1,14 @@
+.st-stock-chart {
+    position: absolute;
+    top: 12px;
+    left: 320px;
+    width: 90%;
+    min-width: 1240px;
+
+    @media #{$sm-screen} {
+        position: static;
+        width: 98%;
+        min-width: 0px;
+        margin: 2px auto;
+    }
+}

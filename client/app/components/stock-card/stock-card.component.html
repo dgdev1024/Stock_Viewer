@@ -1,4 +1,4 @@
-<div class="st-card st-stock-view {{ getChangeClass(stock.change) }}">
+<div class="st-card st-stock-card {{ getChangeClass(stock.change) }}">
   <p class="st-stock-symbol">
     <i class="fa fa-circle" [style.color]="stock.color"></i>
     {{ stock.symbol }}
@@ -17,9 +17,12 @@
       }}
     </button>
     <button class="st-button danger" (click)="onUnwatchClicked($event)">
-      <i class="fa fa-trash"></i> Unwatch stock
+      <i class="fa fa-trash"></i> Unwatch
     </button>
   </div>
+  <p *ngIf="stockError !== ''" class="st-stock-card-error">
+    {{ stockError }}
+  </p>
   <div *ngIf="viewHistory === true" class="st-stock-history-pane">
     <table>
       <tr>
