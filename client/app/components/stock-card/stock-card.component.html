@@ -1,11 +1,11 @@
-<div class="st-card st-stock-card {{ getChangeClass(stock.change) }}">
+<div class="st-card st-stock-card {{ getChangeClass(recentSession().change) }}">
   <p class="st-stock-symbol">
     <i class="fa fa-circle" [style.color]="stock.color"></i>
     {{ stock.symbol }}
   </p>
   <div class="st-stock-recent-sessions">
     <p class="close">{{ recentSession().close }}</p>
-    <p class="change {{ getChangeClass(stock.change) }}">{{ recentSession().change }}</p>
+    <p class="change {{ getChangeClass(recentSession().change) }}">{{ recentSession().change }}</p>
   </div>
   <div class="st-stock-control-panel">
     <button class="st-button primary" (click)="onHistoryClicked($event)">
