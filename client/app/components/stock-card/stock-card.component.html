@@ -5,7 +5,7 @@
   </p>
   <div class="st-stock-recent-sessions">
     <p class="close">{{ recentSession().close }}</p>
-    <p class="change {{ getChangeClass(stock.change) }}">{{ stock.change }}</p>
+    <p class="change {{ getChangeClass(stock.change) }}">{{ recentSession().change }}</p>
   </div>
   <div class="st-stock-control-panel">
     <button class="st-button primary" (click)="onHistoryClicked($event)">

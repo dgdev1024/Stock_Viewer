@@ -30,7 +30,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         symbol: data['symbol'],
         change: data['change'],
         sessions: data['sessions'],
-        color: `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`
+        color: `rgb(${getRandomInt(0, 200)}, ${getRandomInt(0, 200)}, ${getRandomInt(0, 200)})`
       }
       this.watchStocks.push(stock);
       this.stockChart.addStock(stock);
@@ -72,7 +72,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.watchStocks = this.watchStocks.map(s => {
           return { 
             ...s, 
-            color: `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`
+            color: `rgb(${getRandomInt(0, 200)}, ${getRandomInt(0, 200)}, ${getRandomInt(0, 200)})`
           };
         })
         this.working = false;
