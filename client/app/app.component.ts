@@ -50,7 +50,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       for (let i = 0; i < this.watchStocks.length; ++i) {
         if (this.watchStocks[i].symbol === data['symbol']) {
           this.watchStocks[i].sessions = data['updated'];
-          this.stockChart.updateStock(data['symbol'], data['updated']);
+          if (data['newTradingSession'] === true) {
+            this.stockChart.initializeChart(this.watchStocks);
+          } else {
+            this.stockChart.updateStock(data['symbol'], data['updated']);
+          }
         }
       }
     });

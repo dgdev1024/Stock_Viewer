@@ -13,11 +13,12 @@ module.exports = (socket) => {
 
     // AUTOMATIC: Periodically update our stocks as the trading day progresses.
     function automaticUpdate (ms) {
-        stockController.updateStocks(socket, () => {
+        stockController.updateStocks(true, socket, () => {
             setTimeout(automaticUpdate, ms, ms);
         });
     }
     setTimeout(automaticUpdate, 1000, 10000);
+    stockController.updateStocks(false, socket, () => {});
 
     // POST: Add a new stock to the watch list.
     router.post('/watch/:symbol', (req, res) => {

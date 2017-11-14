@@ -227,12 +227,13 @@ module.exports = {
     /// @fn     updateStocks
     /// @brief  Updates the session data on all stocks.
     ///
+    /// @param  {boolean} automatic Is this function being called automatically?
     /// @param  {object} socket The Socket.IO object.
     /// @param  {function} done Run when finished.
     ///
-    updateStocks (socket, done) {
+    updateStocks (automatic, socket, done) {
         // No need to run this function if there is no trading session underway.
-        if (private.tradingUnderway() === false) {
+        if (automatic === true && private.tradingUnderway() === false) {
             return done(null);
         }
 
