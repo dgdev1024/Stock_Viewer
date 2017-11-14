@@ -55,6 +55,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
           } else {
             this.stockChart.updateStock(data['symbol'], data['updated']);
           }
+          return;
         }
       }
     });
