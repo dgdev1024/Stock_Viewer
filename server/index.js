@@ -13,7 +13,6 @@ const cors          = require('cors');
 const compression   = require('compression');
 const socketIo      = require('socket.io');
 const httpStatus    = require('http-status-codes');
-const sslRedirect   = require('heroku-ssl-redirect');
 
 // Export Main Function
 module.exports = () => {
@@ -27,7 +26,13 @@ module.exports = () => {
     app.use(bodyParser.urlencoded({ extended: false }));
 
     if (process.env.NODE_ENV === 'production') {
-        app.use(sslRedirect());
+        app.use((req, res, next) => {
+            if (req.header('x-forwarded-proto') !== 'https') {
+                res.redirect(`https://${req.header('host')}${req.url}`);
+            } else {
+                next();
+            }
+        });
     }
 
     // Socket.IO
